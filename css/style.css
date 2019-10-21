@@ -1,0 +1,96 @@
+/* ===== [Обертка] ===== */
+.wrapper {
+  max-width: 200px;
+  margin: 0 auto;
+  font: 14px 'Trebuchet MS', sans-serif;
+  color: #414141;
+}
+/* ===== [Кнопка] ===== */
+.button {
+  max-width: 100px;
+  max-height: 60px;
+  padding: 5px;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 20px;
+  background: white;
+  border: 1px solid #dee1de;
+  border-radius: 50px;
+  overflow: hidden;
+  transition: 0.2s ease-in-out;
+}
+.button:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+.button:hover ~ .modal-window,
+.modal-window:hover {
+  margin-top: 8px;
+  visibility: visible;
+  opacity: 1;
+}
+.button:hover ~ .modal-window::before,
+.modal-window:hover.modal-window::before {
+  top: -8px;
+  border-bottom: 8px solid #dee1de;
+}
+.button:hover ~ .modal-window::after,
+.modal-window:hover.modal-window::after {
+  top: -6px;
+  border-bottom: 8px solid white;
+}
+/* ===== [Окно] ===== */
+.modal-window {
+  position: relative;
+  padding: 10px;
+  background: white;
+  border: 1px solid #dee1de;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.2s ease-in-out;
+}
+.modal-window::before,
+.modal-window::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -6px;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  transition: 0.2s ease-in-out;
+}
+.modal-window::before {
+  border-bottom: 0px solid #dee1de;
+}
+.modal-window::after {
+  border-bottom: 0px solid white;
+}
+/* ===== [Список] ===== */
+#list-block {
+  margin: 0;
+  padding: 0 5px;
+  list-style: none;
+}
+#list-block .list-item {
+  padding: 5px 0;
+  margin: 5px 0;
+  border-bottom: 1px dashed #dee1de;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+}
+#list-block .list-item::before {
+  content: "";
+  background: url(images/arrow_right.png) no-repeat left center;
+  background-size: contain;
+  padding: 0px 10px;
+}
+#list-block .list-item:hover {
+  padding-left: 5px;
+  border-bottom: 1px dashed #94a594;
+}
+#list-block .list-item:active {
+  padding-left: 3px;
+}

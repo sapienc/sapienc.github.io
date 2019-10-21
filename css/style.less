@@ -1,0 +1,127 @@
+// ===== [Общие переменные] =====
+@text-color: #414141;
+
+@shadow_color: rgba(0,0,0,0.1);
+@shadow_pos: 0px 0px 5px;
+
+@border_color: #DEE1DE;
+
+@animation_params: 0.2s ease-in-out;
+
+@url_css_images: "images";
+// ===== [Переменные менюшки] =====
+@menu_margin_top: 8px;
+
+// ===== [Миксин: видимость элемента] =====
+.visible(@vis: visible; @opa: 1) {
+    visibility: @vis;
+    opacity: @opa;
+}
+.invisible() { .visible(hidden, 0); }
+//////////////////////////////////////////////////////////////////////////////
+
+/* ===== [Обертка] ===== */
+.wrapper {
+    max-width: 200px;
+    margin: 0 auto;
+
+    font: 14px 'Trebuchet MS', sans-serif;
+    color: @text-color;
+}
+/* ===== [Кнопка] ===== */
+.button {
+    max-width: 100px;
+    max-height: 60px;
+    padding: 5px;
+    margin: 0 auto;
+    
+    text-align: center;
+    line-height: 20px;
+
+    background: white;
+    border: 1px solid @border_color;
+    border-radius: 50px;
+
+    overflow: hidden;
+    transition: @animation_params;
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: @shadow_pos @shadow_color;
+        
+        // ===== [Кнопка и окно] ===== 
+        & ~ .modal-window {
+            margin-top: 8px;
+            .visible();
+
+            &::before {
+                top: -8px;
+                border-bottom: 8px solid @border_color;
+            };
+            &::after {
+                top: -6px;
+                border-bottom: 8px solid white;
+            };
+        }
+    }
+}
+/* ===== [Окно] ===== */
+.modal-window {
+    position: relative;
+    padding: 10px;
+
+    background: white;
+    border: 1px solid @border_color;
+    border-radius: 10px;
+
+    box-shadow: @shadow_pos @shadow_color;
+
+    .invisible;
+    transition: @animation_params;
+
+    &:hover:extend(.button:hover ~ .modal-window){};
+    &:hover&::before:extend(.button:hover ~ .modal-window::before){};
+    &:hover&::after:extend(.button:hover ~ .modal-window::after){};
+
+    &::before, &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        margin-left: -6px;
+
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+
+        transition: @animation_params;
+    };
+    &::before { border-bottom: 0px solid @border_color; };
+    &::after { border-bottom: 0px solid white; };
+}
+/* ===== [Список] ===== */
+#list-block {
+    margin: 0;
+    padding: 0 5px;
+    list-style: none;
+
+    & .list-item {
+        padding: 5px 0;
+        margin: 5px 0;
+        border-bottom: 1px dashed @border_color;
+        transition: @animation_params;
+        cursor: pointer;
+        
+        &::before {
+            content: "";
+            background: url(images/arrow_right.png) no-repeat left center;
+            background-size: contain;
+            padding: 0px 10px;
+        };
+
+        &:hover {
+            padding-left: 5px;
+            border-bottom: 1px dashed #94a594;
+        }
+        &:active { padding-left: 3px; }
+    }
+}
